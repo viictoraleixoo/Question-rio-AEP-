@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEP - Questionário</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header-container">
+    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+      <img src="iml/LOGO MEDNET.png" alt="Logo MedNet" class="logo">
+    </a>
+    <div class="header-content">
+      <h1>MedNet Osasco</h1>
+      <div class="nav-buttons no-print">
+        <button type="button" onclick="document.getElementById('biomecanico').scrollIntoView({behavior: 'smooth'})">Biomecânico</button>
+        <button type="button" onclick="document.getElementById('mobiliario').scrollIntoView({behavior: 'smooth'})">Mobiliário / Equipamentos</button>
+        <button type="button" onclick="document.getElementById('organizacionais').scrollIntoView({behavior: 'smooth'})">Organizacionais</button>
+        <button type="button" onclick="document.getElementById('condicoes').scrollIntoView({behavior: 'smooth'})">Condições Ambientais</button>
+        <button type="button" onclick="document.getElementById('psicossociais').scrollIntoView({behavior: 'smooth'})">Psicossociais / Cognitivos</button>
+      </div>
+    </div>
+  </header>
+  <h1 class="print-only-mednet">MedNet Osasco</h1>
+  <h1 class="main-title">Análise Ergonômica Preliminar (AEP)</h1>
+  <form id="aep-form">
+    <h2>Identificação da Empresa</h2>
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label for="razao-social">Razão Social:</label>
+        <input type="text" id="razao-social" name="razao-social" required>
+      </div>
+      <div class="input-wrapper">
+        <label for="cnpj">CNPJ da Unidade:</label>
+        <input type="text" id="cnpj" name="cnpj">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label for="cargo">Cargo/Função:</label>
+        <input type="text" id="cargo" name="cargo" required>
+      </div>
+    </div>
+
+    <script>
+      const perguntas = {
+        'B': [
+          'Você precisa ficar em pé ou em posturas desconfortáveis por muito tempo?',
+          'Passa muito tempo sentado durante o trabalho?',
+          'Precisa se ajoelhar ou agachar frequentemente?',
+          'Anda bastante ou se desloca com frequência durante o expediente?',
+          'Você sente que o trabalho exige muito esforço físico?',
+          'Você levanta ou carrega pesos com frequência?',
+          'Precisa empurrar ou puxar objetos pesados?',
+          'Executa os mesmos movimentos várias vezes ao longo do dia?',
+          'Usa ferramentas ou objetos pesados por períodos longos?',
+          'Seu trabalho exige fazer força com braços, ombros ou mãos repetidamente?',
+          'Alguma parte do corpo fica pressionada ou apoiada em superfícies duras?',
+          'Precisa fazer muitas flexões ou torções da coluna?',
+          'Precisa acionar pedais com frequência?',
+          'Usa alavancas ou comandos de difícil operação com frequência?',
+          'Trabalha muito com os braços elevados?',
+          'Costuma pegar objetos sem apoio adequado (como se fosse com "pega pobre")?',
+          'Sente vibração no corpo todo ou nas mãos ao usar equipamentos?',
+          'Sobe e desce escadas muitas vezes ao dia?',
+          'Usa bastante o teclado ou outro dispositivo de digitação?'
+        ],
+        'M': [
+          'Seu posto de trabalho é improvisado ou adaptado de forma inadequada?',
+          'Consegue ajustar altura da cadeira, mesa ou monitor?',
+          'O equipamento ou máquina que você usa permite ajuste para o seu conforto?',
+          'Sua estação de trabalho foi planejada para o tipo de atividade que você realiza?',
+          'A cadeira é confortável e segue os padrões de ergonomia?',
+          'Tem apoio para as costas na cadeira?',
+          'Consegue se movimentar bem no seu espaço de trabalho?',
+          'Precisa se esticar para alcançar objetos ou documentos durante o trabalho?',
+          'Os móveis ou equipamentos se adaptam bem ao seu corpo?'
+        ],
+        'O': [
+          'Você tem pausas programadas durante a jornada para descansar?',
+          'Consegue sair do posto para beber água, ir ao banheiro ou se alongar?'
+        ],
+        'C': [
+          'O ambiente de trabalho é barulhento a ponto de incomodar?',
+          'Você sente muito calor ou frio durante a jornada?',
+          'A iluminação do local atrapalha ou causa cansaço visual?',
+          'Trabalha em turno noturno com iluminação fraca?',
+          'O piso do local de trabalho é escorregadio ou irregular?'
+        ],
+        'P': [
+          'Você se sente sob pressão constante no trabalho?',
+          'Seu trabalho envolve cobranças excessivas ou metas difíceis de alcançar?',
+          'Tem dificuldade para se concentrar por conta do ambiente ou da rotina?'
+        ]
+      };
+
+      let html = '';
+      for (const secao in perguntas) {
+        if (secao === 'B') html += '<h2 id="biomecanico">1. Biomecânico</h2>';
+        if (secao === 'M') html += '<h2 id="mobiliario">2. Mobiliário / Equipamentos</h2>';
+        if (secao === 'O') html += '<h2 id="organizacionais">3. Organizacionais</h2>';
+        if (secao === 'C') html += '<h2 id="condicoes">4. Condições Ambientais</h2>';
+        if (secao === 'P') html += '<h2 id="psicossociais">5. Psicossociais / Cognitivos</h2>';
+
+        perguntas[secao].forEach((pergunta, index) => {
+          const codigo = `${secao}${(index + 1).toString().padStart(2, '0')}`;
+          html += `
+          <div class="pergunta">
+            <label>(${codigo}) ${pergunta}</label>
+            <div class="resposta">
+              <label><input type="checkbox" name="${codigo}_sim" value="sim" onchange="mostrarOpcao(this)"> Sim</label>
+              <label><input type="checkbox" name="${codigo}_nao" value="não" onchange="mostrarOpcao(this)"> Não</label>
+              <label><input type="checkbox" name="${codigo}_obs" value="obs" onchange="mostrarOpcao(this)"> Obs</label>
+              <select class="percentual" name="${codigo}_percentual">
+                <option value="">Selecione o percentual</option>
+                <option>20%</option>
+                <option>40%</option>
+                <option>60%</option>
+                <option>80%</option>
+                <option>100%</option>
+              </select>
+              <textarea class="observacao" name="${codigo}_observacao" placeholder="Descreva a observação..."></textarea>
+            </div>
+          </div>`;
+        });
+      }
+
+    function salvarFormulario() {
+  const form = document.getElementById('aep-form');
+  const razaoSocial = form.querySelector('#razao-social').value.trim();
+  const cargo = form.querySelector('#cargo').value.trim();
+ 
+  window.print(); // Trigger browser's print dialog
+}
+      document.querySelector('#aep-form').insertAdjacentHTML('beforeend', html);
+    </script>
+
+    <button type="button" onclick="salvarFormulario()" class="no-print">Salvar</button>
+    <button type="button" onclick="enviarFormulario()" class="no-print">Enviar por E-mail</button>
+  </form>
+  <script src="script.js"></script>
+</body>
+</html>

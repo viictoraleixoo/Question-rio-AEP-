@@ -1,0 +1,320 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
+  color: #000;
+  padding: 60px 1rem 1rem;
+}
+
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #9b0f0f;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 10px 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.logo {
+  width: 130px;
+  height: auto;
+  border-radius: 10px;
+  background-color: #ffffff;
+  align-self: flex-start;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.header-container h1 {
+  color: #ffffff;
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: #9b0f0f;
+}
+
+.nav-buttons button {
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-buttons button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #007bff;
+  transition: width 0.5s ease;
+}
+
+.nav-buttons button:hover::after {
+  width: 100%;
+}
+
+.print-only-mednet {
+  display: none;
+}
+
+.main-title {
+  max-width: 900px;
+  margin: 109px auto 1rem; /* Increased from 60px to 80px */
+  text-align: center;
+  color: #5b73f8;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h2 {
+  margin-top: 15px;
+  color: #5b73f8;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+form {
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+  background: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-left: 5px solid #9b0f0f; 
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+.pergunta {
+  margin-bottom: 3rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-left: 5px solid #9b0f0f; 
+  border-radius: 5px;
+}
+
+.pergunta label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+textarea.observacao {
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  background-color: #fff;
+  resize: vertical;
+  display: none;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #000;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.3rem;
+  accent-color: #007bff;
+}
+
+select.percentual {
+  margin-top: 1rem;
+  width: 200px;
+  display: none;
+}
+
+button {
+  margin-top: 1rem;
+  margin-right: 1rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+footer::before {
+  content: " ";
+  display: block;
+  height: 2rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+main, form {
+  margin-top: 100px; 
+}
+
+@media print {
+  body {
+    margin: 0;
+    background-color: #fff !important;
+    color: #000 !important;
+    padding: 0;
+  }
+
+  .no-print, footer {
+    display: none !important;
+  }
+
+  .header-container {
+    display: none !important; 
+  }
+
+  .print-only-mednet {
+    display: block;
+    text-align: center;
+    color: #000;
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin: 1rem auto;
+  }
+
+  @page :first {
+    .print-only-mednet {
+      display: block;
+    }
+  }
+
+  @page :not(:first) {
+    .print-only-mednet {
+      display: none;
+    }
+  }
+
+  main, form {
+    margin-top: 0 !important;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .main-title {
+    text-align: center;
+    color: #5b73f8;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem auto;
+    page-break-inside: avoid;
+  }
+
+  h2 {
+    color: #5b73f8;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .form-group,
+  .pergunta {
+    background: #fff;
+    border-left: 5px solid #9b0f0f; 
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    page-break-inside: avoid;
+  }
+
+  .input-wrapper {
+    flex: 1 1 300px;
+  }
+
+  input[type="text"],
+  select,
+  textarea {
+    background: none !important;
+    color: black !important;
+    border: 1px solid #999;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  textarea::placeholder, input::placeholder {
+    color: #aaa !important;
+  }
+
+  select.percentual,
+  textarea.observacao {
+    display: block; 
+  }
+
+  input[type="checkbox"]:checked {
+    accent-color: #000;
+  }
+}
+
+h2[id] {
+  scroll-margin-top: 155px; 
+}
